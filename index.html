@@ -25,11 +25,11 @@
             font-style: italic;
         }
         .centered-text::first-letter {
-            text-transform: uppercase; /* Garante que a primeira letra seja maiúscula */
+            text-transform: uppercase;
         }
         .smaller-text {
             margin-top: 10px;
-            font-size: 1rem; /* Tamanho menor para a segunda linha */
+            font-size: 1rem;
         }
     </style>
 </head>
@@ -47,13 +47,17 @@
         fetch('data.json')
             .then(response => response.json())
             .then(data => {
-                // Definindo a imagem de fundo dinamicamente
-                document.body.style.backgroundImage = `url('blob/main/images/${data.background_image}')`;
+                // Obter um índice aleatório
+                const randomIndex = Math.floor(Math.random() * data.length);
 
-                // Inserindo o conteúdo JSON nas divs do HTML
-                document.getElementById('versiculo').innerText = data.versiculo;
-                document.getElementById('livro').innerText = data.livro;
-                document.getElementById('categoria').innerText = data.categoria;
+                // Acessar o objeto correspondente ao índice aleatório
+                const versiculo = data[randomIndex];
+
+                // Inserir o conteúdo na página
+                document.getElementById('versiculo').innerText = versiculo.versiculo;
+                document.getElementById('livro').innerText = versiculo.livro;
+                document.getElementById('categoria').innerText = versiculo.categoria;
+                document.getElementById('subcategoria').innerText = versiculo.subcategoria;
             })
             .catch(error => {
                 console.error('Erro ao carregar o JSON:', error);

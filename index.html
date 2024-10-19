@@ -1,1 +1,51 @@
-Teste
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Versículos</title>
+    {% load static %}
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url("{% static 'images/backgrounds/' %}{{ background_image }}") no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        .centered-text {
+            text-align: center;
+            font-size: 2rem;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 1rem;
+            border-radius: 10px;
+            font-style: italic;
+        }
+        .centered-text::first-letter {
+            text-transform: uppercase; /* Garante que a primeira letra seja maiúscula */
+        }
+        .smaller-text {
+            margin-top: 10px;
+            font-size: 1rem; /* Tamanho menor para a segunda linha */
+        }
+    </style>
+</head>
+<body>
+    <div class="centered-text">
+        {{versiculo.versiculo}}
+        <div class="smaller-text">
+            {{versiculo.livro}}
+        </div>
+        <div class="smaller-text">
+            {{versiculo.categoria}}
+        </div>
+    </div>
+</body>
+</html>
+
+

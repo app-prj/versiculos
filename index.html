@@ -37,12 +37,13 @@
 
     <!-- O conteúdo do versículo será inserido dinamicamente aqui -->
     <div class="centered-text" id="versiculo">
-        Carregando...
+        Carregando versículo...
         <div class="smaller-text" id="livro"></div>
         <div class="smaller-text" id="categoria"></div>
     </div>
 
     <script>
+        document.addEventListener('DOMContentLoaded', () => {
         // Função para buscar o arquivo JSON e atualizar a página
         fetch('data.json')
             .then(response => response.json())
@@ -61,11 +62,11 @@
                 document.getElementById('versiculo').innerText = versiculo.versiculo;
                 document.getElementById('livro').innerText = versiculo.livro;
                 document.getElementById('categoria').innerText = versiculo.categoria;
-                //document.getElementById('subcategoria').innerText = versiculo.subcategoria;
-            })
+                })
             .catch(error => {
                 console.error('Erro ao carregar o JSON:', error);
             });
+        });
     </script>
 
 </body>

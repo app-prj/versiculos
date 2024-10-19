@@ -47,7 +47,6 @@
                 .then(data => {
                     const randomImage = data.images[Math.floor(Math.random() * data.images.length)];
                     // Definir a imagem de fundo
-                    document.body.style.backgroundRepeat = no  no-repeat center center fixed;
                     document.body.style.backgroundImage = `url('https://raw.githubusercontent.com/ronabastos/versiculos/main/images/${randomImage}')`;
                 })
                 .catch(error => {

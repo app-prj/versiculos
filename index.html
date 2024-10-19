@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Versículos</title>
-    {% load static %}
     <style>
         body {
             margin: 0;
@@ -13,7 +12,6 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: url("{% static 'images/backgrounds/' %}{{ background_image }}") no-repeat center center fixed;
             background-size: cover;
             color: white;
             font-family: Arial, sans-serif;
@@ -36,16 +34,31 @@
     </style>
 </head>
 <body>
-    <div class="centered-text">
-        {{versiculo.versiculo}}
-        <div class="smaller-text">
-            {{versiculo.livro}}
-        </div>
-        <div class="smaller-text">
-            {{versiculo.categoria}}
-        </div>
+
+    <!-- O conteúdo do versículo será inserido dinamicamente aqui -->
+    <div class="centered-text" id="versiculo">
+        Carregando...
+        <div class="smaller-text" id="livro"></div>
+        <div class="smaller-text" id="categoria"></div>
     </div>
+
+    <script>
+        // Função para buscar o arquivo JSON e atualizar a página
+        fetch('versiculo.json')
+            .then(response => response.json())
+            .then(data => {
+                // Definindo a imagem de fundo dinamicamente
+                document.body.style.backgroundImage = `url('images/${data.background_image}')`;
+
+                // Inserindo o conteúdo JSON nas divs do HTML
+                document.getElementById('versiculo').innerText = data.versiculo;
+                document.getElementById('livro').innerText = data.livro;
+                document.getElementById('categoria').innerText = data.categoria;
+            })
+            .catch(error => {
+                console.error('Erro ao carregar o JSON:', error);
+            });
+    </script>
+
 </body>
 </html>
-
-

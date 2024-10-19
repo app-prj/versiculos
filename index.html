@@ -7,7 +7,9 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            background-size: cover; /* Ajustar a imagem de fundo para cobrir todo o espaço */
+            background-position: center; /* Centralizar a imagem */
+            background-repeat: no-repeat; /* Evitar que a imagem se repita */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -16,6 +18,7 @@
         }
         .centered-text {
             text-align: center;
+            color: white;
             font-size: 2rem;
             padding: 1rem;
             border-radius: 10px;
@@ -44,6 +47,7 @@
                 .then(data => {
                     const randomImage = data.images[Math.floor(Math.random() * data.images.length)];
                     // Definir a imagem de fundo
+                    document.body.style.backgroundRepeat = no  no-repeat center center fixed;
                     document.body.style.backgroundImage = `url('https://raw.githubusercontent.com/ronabastos/versiculos/main/images/${randomImage}')`;
                 })
                 .catch(error => {

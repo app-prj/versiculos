@@ -6,30 +6,26 @@
     <title>Versículos</title>
     <style>
         body {
-            margin: 0;
-            padding: 0;
-            height: 100vh;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
             display: flex;
             justify-content: center;
             align-items: center;
-            background-size: cover;
-            color: white;
-            font-family: Arial, sans-serif;
+            height: 100vh;
+            margin: 0;
         }
         .centered-text {
             text-align: center;
             font-size: 2rem;
-            background: rgba(0, 0, 0, 0.5);
             padding: 1rem;
             border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
             font-style: italic;
         }
-        .centered-text::first-letter {
-            text-transform: uppercase;
-        }
         .smaller-text {
-            margin-top: 10px;
             font-size: 1rem;
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -37,19 +33,33 @@
 
     <!-- O conteúdo do versículo será inserido dinamicamente aqui -->
     <div class="centered-text" id="versiculo">
-        Carregando versículo...
+        <div id="versiculo-text">Carregando versículo...</div>
         <div class="smaller-text" id="livro"></div>
         <div class="smaller-text" id="categoria"></div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+
+        fetch('/images/')
+                .then(imageResponse => imageResponse.json())
+                .then(imageData => {
+                    if (imageData.image) {
+                        // Definindo a imagem de fundo aleatoriamente
+                        document.body.style.backgroundImage = `url('https://raw.githubusercontent.com/ronabastos/versiculos/refs/heads/main/images/${imageData.image}')`;
+                    } else {
+                        console.error('Nenhuma imagem encontrada');
+                    }
+                })
+                .catch(imageError => {
+                    console.error('Erro ao buscar imagem:', imageError);
+        });
+
         // Função para buscar o arquivo JSON e atualizar a página
         fetch('data.json')
             .then(response => response.json())
             .then(data => {
 
-                console.log(data)
                 // Obter um índice aleatório
                 const randomIndex = Math.floor(Math.random() * data.length);
 

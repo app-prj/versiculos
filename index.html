@@ -39,44 +39,37 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', () => { 
+            
+            const randomImage = data.images[Math.floor(Math.random() * data.images.length)];
+            // Definir a imagem de fundo
+            document.body.style.backgroundImage = `url('https://raw.githubusercontent.com/ronabastos/versiculos/main/images/${randomImage}')`;
 
-        fetch('/images/')
-                .then(imageResponse => imageResponse.json())
-                .then(imageData => {
-                    if (imageData.image) {
-                        // Definindo a imagem de fundo aleatoriamente
-                        document.body.style.backgroundImage = `url('https://raw.githubusercontent.com/ronabastos/versiculos/refs/heads/main/images/${imageData.image}')`;
-                    } else {
-                        console.error('Nenhuma imagem encontrada');
-                    }
-                })
-                .catch(imageError => {
-                    console.error('Erro ao buscar imagem:', imageError);
+
+            // Função para buscar o arquivo JSON e atualizar a página
+            fetch('data.json')
+                .then(response => response.json())
+                .then(data => {
+
+                    // Obter um índice aleatório
+                    const randomIndex = Math.floor(Math.random() * data.length);
+
+                    // Acessar o objeto correspondente ao índice aleatório
+                    const versiculo = data[randomIndex];
+
+                    console.log(versiculo)
+
+                    // Inserir o conteúdo na página
+                    document.getElementById('versiculo-text').innerText = versiculo.versiculo;
+                    document.getElementById('livro').innerText = versiculo.livro;
+                    document.getElementById('categoria').innerText = versiculo.categoria;
+                    })
+                .catch(error => {
+                    console.error('Erro ao carregar o JSON:', error);
+            });            
         });
 
-        // Função para buscar o arquivo JSON e atualizar a página
-        fetch('data.json')
-            .then(response => response.json())
-            .then(data => {
 
-                // Obter um índice aleatório
-                const randomIndex = Math.floor(Math.random() * data.length);
-
-                // Acessar o objeto correspondente ao índice aleatório
-                const versiculo = data[randomIndex];
-
-                console.log(versiculo)
-
-                // Inserir o conteúdo na página
-                document.getElementById('versiculo').innerText = versiculo.versiculo;
-                document.getElementById('livro').innerText = versiculo.livro;
-                document.getElementById('categoria').innerText = versiculo.categoria;
-                })
-            .catch(error => {
-                console.error('Erro ao carregar o JSON:', error);
-            });
-        });
     </script>
 
 </body>

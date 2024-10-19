@@ -40,11 +40,16 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => { 
-            
-            const randomImage = data.images[Math.floor(Math.random() * data.images.length)];
-            // Definir a imagem de fundo
-            document.body.style.backgroundImage = `url('https://raw.githubusercontent.com/ronabastos/versiculos/main/images/${randomImage}')`;
-
+            fetch('images.json')
+                .then(response => response.json())
+                .then(data => {
+                    const randomImage = data.images[Math.floor(Math.random() * data.images.length)];
+                    // Definir a imagem de fundo
+                    document.body.style.backgroundImage = `url('https://raw.githubusercontent.com/ronabastos/versiculos/main/images/${randomImage}')`;
+                })
+                .catch(error => {
+                    console.error('Erro ao carregar o JSON:', error);
+            }); 
 
             // Função para buscar o arquivo JSON e atualizar a página
             fetch('data.json')

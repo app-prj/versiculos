@@ -44,11 +44,11 @@
 
     <script>
         // Função para buscar o arquivo JSON e atualizar a página
-        fetch('versiculo.json')
+        fetch('data.json')
             .then(response => response.json())
             .then(data => {
                 // Definindo a imagem de fundo dinamicamente
-                document.body.style.backgroundImage = `url('images/${data.background_image}')`;
+                document.body.style.backgroundImage = `url('blob/main/images/${data.background_image}')`;
 
                 // Inserindo o conteúdo JSON nas divs do HTML
                 document.getElementById('versiculo').innerText = data.versiculo;

@@ -41,7 +41,47 @@
     </div>
 
     <script>
+        function obterDataHoraAtual() {
+            return new Date().toISOString();
+        }
+
         document.addEventListener('DOMContentLoaded', () => { 
+            fetch('acessos.json')
+                .then(response => response.json())
+                .then(data => {
+                    const ultimoRegistro = registros[registros.length - 1];
+                    const novoIndice = ultimoRegistro.indice + 1;
+
+                    const novoRegistro = {
+                        data_hora: obterDataHoraAtual()
+                    };
+
+                    try {
+                        // Envia o registro para o Google Sheets via POST
+                        const googleScriptURL = "https://script.google.com/macros/s/AKfycbxjRgg2A6WtBNFsCkRMOqEK9mFpzfw-W1hFjO6m5fMQ3BK-yA_CrHYhbWLmQfyjPLAc/exec"
+
+                        const response = fetch(googleScriptURL, {
+                            method: 'POST',
+                            body: JSON.stringify(novoRegistro),
+                            headers: {
+                                'Content-Type': 'application/json'
+                            }
+                        });
+
+                        const resultado =  response.text();
+                        console.log(resultado); // Exibe a resposta no console
+
+                    } catch (error) {
+                        console.error('Erro ao adicionar o registro:', error);
+                    }
+
+
+                })
+                .catch(error => {
+                    console.error('Erro ao carregar o JSON de acesso:', error);
+            }); 
+
+
             fetch('images.json')
                 .then(response => response.json())
                 .then(data => {

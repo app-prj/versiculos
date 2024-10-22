@@ -41,8 +41,20 @@
     </div>
 
     <script>
-        function obterDataHoraAtual() {
-            return new Date().toISOString();
+        function obterDataHoraAtualBrasil() {
+            // Obter a data e hora atual
+            const dataAtual = new Date();
+
+            // Obter o deslocamento de fuso horário em minutos (para Brasília, é -180 minutos = -3 horas)
+            const fusoHorarioBrasil = -180; // Fuso de Brasília (UTC-3)
+
+            // Ajustar a hora para o fuso horário de Brasília
+            const dataComFuso = new Date(dataAtual.getTime() + (fusoHorarioBrasil * 60 * 1000));
+
+            // Formatar como uma string no estilo ISO
+            const dataHoraBrasil = dataComFuso.toISOString().slice(0, 19).replace('T', ' ');
+
+            return dataHoraBrasil;
         }
 
         async function atualizarAcesso(){           

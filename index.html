@@ -59,7 +59,8 @@
                     body: JSON.stringify(novoRegistro),
                     headers: {
                         'Content-Type': 'application/json'
-                    }
+                    },
+                    mode: 'no-cors'
                 });
 
                 const resultado =  await response.text();
